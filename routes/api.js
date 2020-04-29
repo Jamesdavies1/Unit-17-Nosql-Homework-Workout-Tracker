@@ -17,19 +17,27 @@ router.put("/api/workouts/:id", (req, res) => {
     .catch(err => res.json(err));
 });
 
-//WIP new post req!!!
 router.post("/api/workouts", (req, res) => {
-  console.log("i have been hit");
-  Workout.create({})
+  Workout.create({
+    day: Date.now()
+  })
     .then(newWorkout => {
+      console.log("o am the cretead worrkout: ", newWorkout);
       res.json(newWorkout);
     })
     .catch(err => res.json(err));
 });
 
-//get req
-// router.route("/api/workouts").get((req, res) => {
-//   return workouts;
-// });
+router.get("/api/workouts/range", (req, res) => {
+  Workout.find({})
+    .then(workouts => {
+      res.json(workouts);
+    })
+    .catch(err => res.json(err));
+});
+
+router.delete("/api/workouts", (req, res) => {
+  // I sawthe demand in the homework to add a delete route but i couldn't find this functoinality in the frontend
+});
 
 module.exports = router;
